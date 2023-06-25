@@ -34,12 +34,12 @@ const ShowMentoList = () => {
   };
 
   const getPostList = () => {
-    const url = `${APIURL}/post/posts`;
+    const url = `${APIURL}/post/posts/`;
     axios
       .get(url)
       .then((res) => {
         console.log(res);
-        setPostList(res);
+        setPostList(res.data);
       })
       .catch((err) => {
         console.log("getPostList err: ", err);
@@ -69,19 +69,18 @@ const ShowMentoList = () => {
               subject={post.subject}
               onClick={goToTeacherDetail}
             >
-              {post.title}
+                            제목: {post.title}
               <br />
-              {post.contents}
               <br />
-              {post.semester}
+              수강 학기: {post.semester}
               <br />
-              {post.gpa}
+              최종 학점: {post.gpa}
               <br />
-              {post.professor}
+              교수님: {post.professor}
               <br />
-              {post.mentor}
+              멘토 명: {post.mentor}
               <br />
-              {post.subject}
+              과목 명: {post.subject}
               <br />
             </Box>
           ))}
@@ -114,7 +113,7 @@ const Title = styled.div`
 
 const Box = styled.div`
   background-color: #c6e5f9;
-  height: 100px;
+  height: auto;
   width: 300px;
   padding: 10px;
   border-radius: 7px;
@@ -127,6 +126,9 @@ const BoxContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
+  cursor: pointer;
+  text-align: left;
+  maigin: 10px 30px;
 `;
 
 export default ShowMentoList;

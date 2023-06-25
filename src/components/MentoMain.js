@@ -64,12 +64,12 @@ const MentoMain = () => {
   };
 
   const getPostList = () => {
-    const url = `${APIURL}/post/posts`;
+    const url = `${APIURL}/post/posts/`;
     axios
       .get(url)
       .then((res) => {
         console.log(res);
-        setPostList(res);
+        setPostList(res.data);
       })
       .catch((err) => {
         console.log("getPostList err: ", err);
@@ -92,12 +92,13 @@ const MentoMain = () => {
               sem={postList.semester}
               onClick={gotodetail}
             >
-              <Pk>
-                {postList.title}
+                            <Pk>
+                {postList.subject}
                 <br />
-                {postList.professor}
+                교수님: {postList.professor}
                 <br />
-                {postList.semester}
+                수강 학기: {postList.semester}
+                
               </Pk>
             </EachPost>
           ))}

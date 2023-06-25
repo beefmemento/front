@@ -24,12 +24,12 @@ const MentiComment = () => {
   };
 
   const getPostList = () => {
-    const url = `${APIURL}/post/posts`;
+    const url = `${APIURL}/post/posts/`;
     axios
       .get(url)
       .then((res) => {
         console.log(res);
-        setPostList(res);
+        setPostList(res.data);
       })
       .catch((err) => {
         console.log("getPostList err: ", err);
@@ -51,7 +51,7 @@ const MentiComment = () => {
               sem={postList.semester}
               onClick={gotodetail}
             >
-              {postList.title}
+              
             </p>
           ))}
         </Title>
@@ -63,7 +63,7 @@ const MentiComment = () => {
               sem={postList.semester}
               intro={postList.content}
             >
-              <Pk>
+            <Pk>
                 과목 명: {postList.title}
                 <br />
                 교수님: {postList.professor} 교수님
@@ -72,7 +72,7 @@ const MentiComment = () => {
                 <br />
                 <br />
                 소개: {postList.content}
-              </Pk>
+              </Pk>  
             </EachPost>
           ))}
         </DetailSubject>

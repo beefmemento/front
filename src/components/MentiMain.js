@@ -39,12 +39,12 @@ const MentiMain = () => {
   };
 
   const getPostList = () => {
-    const url = `${APIURL}/post/posts`;
+    const url = `${APIURL}/post/posts/`;
     axios
       .get(url)
       .then((res) => {
         console.log(res);
-        setPostList(res);
+        setPostList(res.data);
       })
       .catch((err) => {
         console.log("getPostList err: ", err);
@@ -67,13 +67,13 @@ const MentiMain = () => {
               sem={postList.semester}
               onClick={gotodetail}
             >
-              <Pk>
+                            <Pk>
                 {postList.title}
                 <br />
                 {postList.professor}
                 <br />
                 {postList.semester}
-              </Pk>
+              </Pk>  
             </EachPost>
           ))}
         </DetailSubject>

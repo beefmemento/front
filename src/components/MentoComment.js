@@ -24,12 +24,12 @@ const MentoComment = () => {
   };
 
   const getPostList = () => {
-    const url = `${APIURL}/post/posts`;
+    const url = `${APIURL}/post/posts/`;
     axios
       .get(url)
       .then((res) => {
         console.log(res);
-        setPostList(res);
+        setPostList(res.data);
       })
       .catch((err) => {
         console.log("getPostList err: ", err);
@@ -51,7 +51,6 @@ const MentoComment = () => {
               sem={postList.semester}
               onClick={gotodetail}
             >
-              {postList.title}
             </p>
           ))}
         </Title>

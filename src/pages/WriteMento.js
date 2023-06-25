@@ -37,7 +37,7 @@ const WriteTitle = React.memo(() => {
 const WriteMento = () => {
   const [inputs, setInputs] = useState({
     title: "",
-    contents: "",
+    content: "",
     mentor: "",
     subject: "",
     professor: "",
@@ -70,20 +70,21 @@ const WriteMento = () => {
   const navigate = useNavigate();
   const onSubmit = async () => {
     try {
-      const url = `${APIURL}/user/user_subjects`;
-      console.log(url);
-      const res = await axios.post(url, {
-        title: inputs.title,
-        contents: inputs.contents,
-      });
-
+      const url = `${APIURL}/post/posts/`;
+      // console.log(url);
+      console.log(inputs);
+      const res = await axios.post(url, 
+        inputs,
+      );
       console.log(res);
 
       alert("글이 작성되었습니다!");
       navigate("/");
+     
     } catch (err) {
       console.log(err);
     }
+    
   };
 
   useEffect(() => {
@@ -121,7 +122,7 @@ const WriteMento = () => {
         <MentorInput
           name="mentor"
           type="text"
-          placeholder="닉네임"
+          placeholder="유저 이름"
           onChange={onChange}
           value={inputs.mentor}
           ref={mentorInput}
