@@ -1,35 +1,54 @@
 import React from "react";
 import styled from "styled-components";
-import KakaoLogin from "../assets/kakao_login.png";
-import Text from "./Text";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { APIURL } from "../App";
 
-const postList = [
-  {
-    id: "1",
-    title: "네트워크",
-    professor: "소정민",
-    sem: "2023 1학기",
-    intro: "열심히 하겠습니다~ A+ 보장!",
-  },
-];
+// const postList = [
+//   {
+//     id: "1",
+//     title: "네트워크",
+//     professor: "소정민",
+//     sem: "2023 1학기",
+//     intro: "열심히 하겠습니다~ A+ 보장!",
+//   },
+// ];
 
 const MentiComment = () => {
+  const [postList, setPostList] = useState();
+
   const navigate = useNavigate();
   const gotodetail = () => {
     navigate("/detail");
   };
+
+  const getPostList = () => {
+    const url = `${APIURL}/post/posts`;
+    axios
+      .get(url)
+      .then((res) => {
+        console.log(res);
+        setPostList(res);
+      })
+      .catch((err) => {
+        console.log("getPostList err: ", err);
+      });
+  };
+
+  useEffect(() => {
+    getPostList();
+  }, []);
+
   return (
     <>
       <MainContent>
         <Title>
-          {postList.map((postList) => (
+          {postList?.map((postList) => (
             <p
               title={postList.title}
               professor={postList.professor}
-              sem={postList.sem}
+              sem={postList.semester}
               onClick={gotodetail}
             >
               {postList.title}
@@ -37,22 +56,22 @@ const MentiComment = () => {
           ))}
         </Title>
         <DetailSubject>
-          {postList.map((postList) => (
+          {postList?.map((postList) => (
             <EachPost
               title={postList.title}
               professor={postList.professor}
-              sem={postList.sem}
-              intro={postList.intro}
+              sem={postList.semester}
+              intro={postList.content}
             >
               <Pk>
                 과목 명: {postList.title}
                 <br />
                 교수님: {postList.professor} 교수님
                 <br />
-                수강 학기: {postList.sem}
+                수강 학기: {postList.semester}
                 <br />
                 <br />
-                소개: {postList.intro}
+                소개: {postList.content}
               </Pk>
             </EachPost>
           ))}
@@ -70,7 +89,7 @@ const DetailSubject = styled.div`
   flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
-  font-family: "SUITE-Regular";
+  font-family: "locus_sangsang";
 `;
 
 const EachPost = styled.div`
@@ -103,7 +122,7 @@ const MainContent = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  font-family: "SUITE-Regular";
+  font-family: "locus_sangsang";
 `;
 
 const Title = styled.div`
@@ -117,7 +136,7 @@ const Register = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "SUITE-Regular";
+  font-family: "locus_sangsang";
 `;
 
 const Button = styled.div`

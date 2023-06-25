@@ -1,33 +1,34 @@
 import React from "react";
 import styled from "styled-components";
-import KakaoLogin from "../assets/kakao_login.png";
-import Text from "./Text";
-import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { APIURL } from "../App";
 
-const postList = [
-  {
-    id: "1",
-    title: "네트워크",
-    professor: "소정민",
-    sem: "2023 1학기",
-  },
-  {
-    id: "2",
-    title: "캡스톤디자인",
-    professor: "정영민",
-    sem: "2023 1학기",
-  },
-  {
-    id: "2",
-    title: "캡스톤디자인",
-    professor: "정영민",
-    sem: "2023 1학기",
-  },
-];
+// const postList = [
+//   {
+//     id: "1",
+//     title: "네트워크",
+//     professor: "소정민",
+//     sem: "2023 1학기",
+//   },
+//   {
+//     id: "2",
+//     title: "캡스톤디자인",
+//     professor: "정영민",
+//     sem: "2023 1학기",
+//   },
+//   {
+//     id: "2",
+//     title: "캡스톤디자인",
+//     professor: "정영민",
+//     sem: "2023 1학기",
+//   },
+// ];
 
 const MentiMain = () => {
+  const [postList, setPostList] = useState();
+
   const navigate = useNavigate();
   const gotodetail = () => {
     navigate("/mentolist");
@@ -37,16 +38,33 @@ const MentiMain = () => {
     navigate("/writementi");
   };
 
+  const getPostList = () => {
+    const url = `${APIURL}/post/posts`;
+    axios
+      .get(url)
+      .then((res) => {
+        console.log(res);
+        setPostList(res);
+      })
+      .catch((err) => {
+        console.log("getPostList err: ", err);
+      });
+  };
+
+  useEffect(() => {
+    getPostList();
+  }, []);
+
   return (
     <>
       <MainContent>
         <Title>수강 과목</Title>
         <DetailSubject>
-          {postList.map((postList) => (
+          {postList?.map((postList) => (
             <EachPost
               title={postList.title}
               professor={postList.professor}
-              sem={postList.sem}
+              sem={postList.semester}
               onClick={gotodetail}
             >
               <Pk>
@@ -54,7 +72,7 @@ const MentiMain = () => {
                 <br />
                 {postList.professor}
                 <br />
-                {postList.sem}
+                {postList.semester}
               </Pk>
             </EachPost>
           ))}
@@ -72,7 +90,7 @@ const DetailSubject = styled.div`
   flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
-  font-family: "SUITE-Regular";
+  font-family: "locus_sangsang";
 `;
 
 const EachPost = styled.div`
@@ -102,7 +120,7 @@ const MainContent = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  font-family: "SUITE-Regular";
+  font-family: "locus_sangsang";
 `;
 
 const Title = styled.div`
@@ -116,7 +134,7 @@ const Register = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "SUITE-Regular";
+  font-family: "locus_sangsang";
 `;
 
 const Button = styled.div`

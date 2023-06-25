@@ -15,9 +15,17 @@ code {
 }
 
 @font-face {
-  font-family: "SUITE-Regular";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2")
+  font-family: "locus_sangsang";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/locus_sangsang.woff2")
     format("woff2");
-  font-weight: 500;
+  font-weight: bolder;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "locus_sangsang";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/locus_sangsang.woff")
+    format("woff");
+  font-weight: normal;
   font-style: normal;
 }

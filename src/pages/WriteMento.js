@@ -16,6 +16,7 @@ import {
   SubjectInput,
 } from "../style/styledComponents";
 import axios from "axios";
+import { APIURL } from "../App";
 
 const SubmitComponent = React.memo(({ onSubmit }) => {
   return (
@@ -67,22 +68,23 @@ const WriteMento = () => {
   };
 
   const navigate = useNavigate();
-  // const onSubmit = async () => {
-  //   try {
-  //     //const url = `${APIURL}/api/posts/`;
-  //     const res = await axios.post(url, {
-  //       title: inputs.title,
-  //       contents: inputs.contents,
-  //     });
+  const onSubmit = async () => {
+    try {
+      const url = `${APIURL}/user/user_subjects`;
+      console.log(url);
+      const res = await axios.post(url, {
+        title: inputs.title,
+        contents: inputs.contents,
+      });
 
-  //     console.log(res);
+      console.log(res);
 
-  //     alert("글이 작성되었습니다!");
-  //     navigate("/");
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
+      alert("글이 작성되었습니다!");
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
     titleInput.current.focus();
@@ -163,7 +165,7 @@ const WriteMento = () => {
         />
       </PostWriteDiv>
 
-      <SubmitComponent />
+      <SubmitComponent onSubmit={onSubmit} />
     </PostSection>
   );
 };

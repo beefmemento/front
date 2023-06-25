@@ -1,33 +1,54 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Menu from "../components/Menu";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { APIURL } from "../App";
 
-const postList = [
-  {
-    id: "1",
-    title: "자료구조 멘토",
-    contents: "자료구조 탑",
-    semester: "23-1",
-    gpa: "4.30",
-    professor: "장형수",
-    mentor: "멋사",
-    subject: "자료구조:장형수",
-  },
-  {
-    id: "2",
-    title: "솔직히 멋사 폼 미친거 아님?",
-    contents: "서강 멋사 폼 미쳤다",
-    semester: "22-2",
-  },
-];
+// const postList = [
+//   {
+//     id: "1",
+//     title: "자료구조 멘토",
+//     contents: "자료구조 탑",
+//     semester: "23-1",
+//     gpa: "4.30",
+//     professor: "장형수",
+//     mentor: "멋사",
+//     subject: "자료구조:장형수",
+//   },
+//   {
+//     id: "2",
+//     title: "솔직히 멋사 폼 미친거 아님?",
+//     contents: "서강 멋사 폼 미쳤다",
+//     semester: "22-2",
+//   },
+// ];
 
 const ShowMentoList = () => {
+  const [postList, setPostList] = useState();
+
   const navigate = useNavigate();
 
   const goToTeacherDetail = () => {
     navigate("/teacherdetail");
   };
+
+  const getPostList = () => {
+    const url = `${APIURL}/post/posts`;
+    axios
+      .get(url)
+      .then((res) => {
+        console.log(res);
+        setPostList(res);
+      })
+      .catch((err) => {
+        console.log("getPostList err: ", err);
+      });
+  };
+
+  useEffect(() => {
+    getPostList();
+  }, []);
 
   return (
     <>
@@ -35,12 +56,12 @@ const ShowMentoList = () => {
         <Title>멘토 찾기</Title>
 
         <BoxContainer>
-          {postList.map((post) => (
+          {postList?.map((post) => (
             <Box
               key={post.id}
               title={post.title}
               postID={post.id}
-              contents={post.contents}
+              contents={post.content}
               semester={post.semester}
               gpa={post.gpa}
               professor={post.professor}
@@ -79,7 +100,7 @@ const MainContent = styled.div`
   border-radius: 20px;
   overflow-y: scroll;
   padding: 5px;
-  font-family: "SUITE-Regular";
+  font-family: "locus_sangsang";
   -ms-overflow-style: none;
   scrollbar-width: none;
   &::-webkit-scrollbar {

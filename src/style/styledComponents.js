@@ -97,6 +97,8 @@ export const PostTitle = styled.span`
   margin-bottom: 5px;
   font-family: "Black Han Sans", sans-serif;
   font-size: 15px;
+  text-shadow: 4px 2px 2px gray;
+  color: white;
 `;
 
 export const PostListDiv = styled.div`
@@ -308,4 +310,6 @@ export const PostSubmit = styled.div`
   margin-bottom: 5px;
   font-family: "Black Han Sans", sans-serif;
   font-size: 15px;
+  text-shadow: 4px 2px 2px gray;
+  color: white;
 `;

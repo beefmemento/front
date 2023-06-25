@@ -1,14 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import KakaoLogin from "../assets/kakao_login.png";
-import Text from "./Text";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Choice = () => {
-  const [color, setColor] = useState("white");
-  const [color1, setColor1] = useState("white");
-
   const navigate = useNavigate();
   const gotodetail = () => {
     navigate("/");
@@ -21,24 +15,18 @@ const Choice = () => {
   return (
     <ChoiceContainer>
       <DetailContainer1
-        style={{ backgroundColor: `${color}` }}
         onClick={() => {
-          setColor("#C6E5F9");
-          setColor1("white");
           gotodetail();
         }}
       >
-        mento
+        mentor
       </DetailContainer1>
       <DetailContainer1
-        style={{ backgroundColor: `${color1}` }}
         onClick={() => {
-          setColor1("#C6E5F9");
-          setColor("white");
           gotodetail1();
         }}
       >
-        menti
+        mentee
       </DetailContainer1>
     </ChoiceContainer>
   );
@@ -49,13 +37,14 @@ const ChoiceContainer = styled.div`
   flex-direction: row;
   align-items: center;
   gap: 10px;
-  background-color: #ffffff;
   width: 100%;
   height: 60px;
   margin: 10px 0px;
   text-align: center;
   justify-content: space-evenly;
   font-family: "Black Han Sans", sans-serif;
+  text-shadow: 4px 2px 2px gray;
+  color: white;
 `;
 
 const DetailContainer1 = styled.div`
@@ -65,6 +54,7 @@ const DetailContainer1 = styled.div`
   text-align: center;
   border: 3px solid #c6e5f9;
   line-height: 30px;
+  background-color: #C6E5F9;
 `;
 
 const DetailContainer2 = styled.div`
