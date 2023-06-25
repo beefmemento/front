@@ -1,6 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import KakaoLogin from "../assets/kakao_login.png";
+import Text from "./Text";
+import axios from "axios";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const postList = [
   {
@@ -21,47 +25,22 @@ const postList = [
     professor: "정영민",
     sem: "2023 1학기",
   },
-  {
-    id: "2",
-    title: "캡스톤디자인",
-    professor: "정영민",
-    sem: "2023 1학기",
-  },
-  {
-    id: "2",
-    title: "캡스톤디자인",
-    professor: "정영민",
-    sem: "2023 1학기",
-  },
-  {
-    id: "2",
-    title: "캡스톤디자인",
-    professor: "정영민",
-    sem: "2023 1학기",
-  },
-  {
-    id: "2",
-    title: "캡스톤디자인",
-    professor: "정영민",
-    sem: "2023 1학기",
-  },
 ];
 
-const MentoMain = () => {
+const MentiMain = () => {
   const navigate = useNavigate();
-
-  const goToWrite = () => {
-    navigate("/writemento");
+  const gotodetail = () => {
+    navigate("/mentolist");
   };
 
-  const gotodetail = () => {
-    navigate("/detail");
+  const goToWrite = () => {
+    navigate("/writementi");
   };
 
   return (
     <>
       <MainContent>
-        <Title>내 과목</Title>
+        <Title>수강 과목</Title>
         <DetailSubject>
           {postList.map((postList) => (
             <EachPost
@@ -121,13 +100,13 @@ const MainContent = styled.div`
   -ms-overflow-style: none;
   scrollbar-width: none;
   &::-webkit-scrollbar {
-  display: none;
+    display: none;
   }
+  font-family: "SUITE-Regular";
 `;
 
 const Title = styled.div`
   padding: 20px 0px;
-  font-family: "SUITE-Regular";
 `;
 
 const Register = styled.div`
@@ -146,5 +125,4 @@ const Button = styled.div`
   border-radius: 8px;
   cursor: pointer;
 `;
-
-export default MentoMain;
+export default MentiMain;
