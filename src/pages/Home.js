@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { AfterLogin, BeforeLogin } from "../components/Login";
+import MentoMain from "../components/MentoMain";
+import Menu from "../components/Menu";
+import Choice from "../components/Choice";
 
 const Home = () => {
   const [isLogin, setIsLogin] = useState(false);
 
   return (
-    <HomeContainer>{isLogin ? <AfterLogin /> : <BeforeLogin />}</HomeContainer>
+    <>
+      <Choice />
+      <MentoMain />
+      <Menu />
+    </>
   );
 };
 

@@ -4,8 +4,8 @@ import reset from "styled-reset";
 const GlobalStyle = createGlobalStyle`
     ${reset};
      body {
-        max-width : 430px;
-        min-width : 390px;
+        max-width : 390px;
+        max-height : 844px;
         margin : 0 auto;
      }
 `;

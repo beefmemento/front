@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <HeaderContainer bgColor={palette.brand_orange}>
       <Text weight={500} color={palette.brand_black}>
-        멋쟁이사자처럼
+        MEMENTO
       </Text>
     </HeaderContainer>
   );
@@ -15,8 +15,8 @@ const Header = () => {
 
 const HeaderContainer = styled.div`
   width: 100%;
-  padding: 10px;
-  background-color: ${({ bgColor }) => bgColor};
+  height: 72px;
+  background-color: #C6E5F9;
 `;
 
 export default Header;
