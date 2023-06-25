@@ -1,53 +1,58 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { APIURL } from "../App";
 
-const postList = [
-  {
-    id: "1",
-    title: "네트워크",
-    professor: "소정민",
-    sem: "2023 1학기",
-  },
-  {
-    id: "2",
-    title: "캡스톤디자인",
-    professor: "정영민",
-    sem: "2023 1학기",
-  },
-  {
-    id: "2",
-    title: "캡스톤디자인",
-    professor: "정영민",
-    sem: "2023 1학기",
-  },
-  {
-    id: "2",
-    title: "캡스톤디자인",
-    professor: "정영민",
-    sem: "2023 1학기",
-  },
-  {
-    id: "2",
-    title: "캡스톤디자인",
-    professor: "정영민",
-    sem: "2023 1학기",
-  },
-  {
-    id: "2",
-    title: "캡스톤디자인",
-    professor: "정영민",
-    sem: "2023 1학기",
-  },
-  {
-    id: "2",
-    title: "캡스톤디자인",
-    professor: "정영민",
-    sem: "2023 1학기",
-  },
-];
+// const postList = [
+//   {
+//     id: "1",
+//     title: "네트워크",
+//     professor: "소정민",
+//     sem: "2023 1학기",
+//   },
+//   {
+//     id: "2",
+//     title: "캡스톤디자인",
+//     professor: "정영민",
+//     sem: "2023 1학기",
+//   },
+//   {
+//     id: "2",
+//     title: "캡스톤디자인",
+//     professor: "정영민",
+//     sem: "2023 1학기",
+//   },
+//   {
+//     id: "2",
+//     title: "캡스톤디자인",
+//     professor: "정영민",
+//     sem: "2023 1학기",
+//   },
+//   {
+//     id: "2",
+//     title: "캡스톤디자인",
+//     professor: "정영민",
+//     sem: "2023 1학기",
+//   },
+//   {
+//     id: "2",
+//     title: "캡스톤디자인",
+//     professor: "정영민",
+//     sem: "2023 1학기",
+//   },
+//   {
+//     id: "2",
+//     title: "캡스톤디자인",
+//     professor: "정영민",
+//     sem: "2023 1학기",
+//   },
+// ];
 
 const MentoMain = () => {
+  const [postList, setPostList] = useState();
+
   const navigate = useNavigate();
 
   const goToWrite = () => {
@@ -58,16 +63,33 @@ const MentoMain = () => {
     navigate("/detail");
   };
 
+  const getPostList = () => {
+    const url = `${APIURL}/post/posts`;
+    axios
+      .get(url)
+      .then((res) => {
+        console.log(res);
+        setPostList(res);
+      })
+      .catch((err) => {
+        console.log("getPostList err: ", err);
+      });
+  };
+
+  useEffect(() => {
+    getPostList();
+  }, []);
+
   return (
     <>
       <MainContent>
         <Title>내 과목</Title>
         <DetailSubject>
-          {postList.map((postList) => (
+          {postList?.map((postList) => (
             <EachPost
               title={postList.title}
               professor={postList.professor}
-              sem={postList.sem}
+              sem={postList.semester}
               onClick={gotodetail}
             >
               <Pk>
@@ -75,7 +97,7 @@ const MentoMain = () => {
                 <br />
                 {postList.professor}
                 <br />
-                {postList.sem}
+                {postList.semester}
               </Pk>
             </EachPost>
           ))}
@@ -93,7 +115,7 @@ const DetailSubject = styled.div`
   flex-wrap: wrap;
   flex-direction: row;
   align-items: center;
-  font-family: "SUITE-Regular";
+  font-family: "locus_sangsang";
 `;
 
 const EachPost = styled.div`
@@ -127,7 +149,7 @@ const MainContent = styled.div`
 
 const Title = styled.div`
   padding: 20px 0px;
-  font-family: "SUITE-Regular";
+  font-family: "locus_sangsang";
 `;
 
 const Register = styled.div`
@@ -137,7 +159,7 @@ const Register = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "SUITE-Regular";
+  font-family: "locus_sangsang";
 `;
 
 const Button = styled.div`

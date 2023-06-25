@@ -4,7 +4,7 @@ import { palette } from "../style/palette";
 
 const Header = () => {
   return (
-    <HeaderContainer bgColor={palette.brand_orange}>MEMENTO</HeaderContainer>
+    <HeaderContainer bgColor={palette.brand_orange}>MAMENTOR</HeaderContainer>
   );
 };
 
@@ -17,6 +17,8 @@ const HeaderContainer = styled.div`
   align-items: center;
   font-family: "Black Han Sans", sans-serif;
   font-size: 40px;
+  text-shadow: 4px 2px 2px gray;
+  color: white;
 `;
 
 export default Header;
